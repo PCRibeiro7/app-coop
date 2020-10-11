@@ -1,0 +1,25 @@
+runtime: nodejs10
+
+service: teste-mais-vendas
+
+handlers:
+  - url: /static
+    static_dir: build/static
+
+
+  - url: /(.*\.(json|ico|js))$
+    static_files: build/\1
+    upload: build/.*\.(json|ico|js)$
+
+
+
+  - url: /.well-known/acme-challenge/(.*)
+    mime_type: text/plain
+    static_files: build/well-known/acme-challenge/\1
+    upload: build/well-known/acme-challenge/.*
+
+
+  - url: .*
+    static_files: build/index.html
+    upload: build/index.html
+
